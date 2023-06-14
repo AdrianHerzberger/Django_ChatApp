@@ -13,22 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from turtle import home
 from django.contrib import admin
 from django.urls import path
 
 from chat.views import index, login_view
+
 from django.conf.urls.static import static
 from django_chat_app import settings
-from django.conf.urls.static import static
 
 def trigger_error(request):
     division_by_zero = 1 / 0
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', index, name='home'),  # Use the 'index' view for the root URL
     path('admin/', admin.site.urls),
     path('chat/', index),
     path('login/', login_view),
     path('sentry-debug/', trigger_error),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
